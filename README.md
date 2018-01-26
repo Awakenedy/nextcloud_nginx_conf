@@ -1,1 +1,1 @@
-# nextcloud_nginx_conf
+nginx 中nextcloud和collabora配置
