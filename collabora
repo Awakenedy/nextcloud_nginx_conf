@@ -1,0 +1,36 @@
+server {
+    listen       443 ssl;
+    server_name   collabora.example.com;
+    ssl on;
+ssl_certificate /etc/letsencrypt/live/collabora.example.com/fullchain.pem; # managed by Certbot
+ssl_certificate_key /etc/letsencrypt/live/collabora.example.com/privkey.pem; # managed by Certbot
+    #ssl_certificate /etc/nginx/cert/nextcloud.crt;
+    #ssl_certificate_key /etc/nginx/cert/nextcloud.key;
+    location / {
+        proxy_pass https://localhost:9980;
+        proxy_set_header Host $http_host;
+            
+    }
+
+
+    location ^~ /loleaflet {
+        proxy_pass https://localhost:9980;
+        proxy_set_header Host $http_host;
+            
+    }
+
+    location ^~ /hosting/discovery {
+        proxy_pass https://localhost:9980;
+        proxy_set_header Host $http_host;
+            
+    }
+
+    location ^~ /lool {
+        proxy_pass https://localhost:9980;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+        proxy_set_header Host $http_host;
+            
+    }
+
+}
